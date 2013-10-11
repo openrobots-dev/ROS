@@ -1,0 +1,4 @@
+<launch>
+  <!-- triskar teleop node-->
+  <node pkg="triskar" type="teleop_keyboard.py" name="teleop_keyboard"/>
+</launch>
