@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(triskar)
+project(r2p)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -23,10 +23,13 @@ find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs geometry_msgs mess
 ## Generate messages in the 'msg' folder
 add_message_files(
   FILES
-  Velocity.msg
-  Proximity.msg
   Encoder.msg
-  ImuRaw.msg
+  EncoderStamped.msg
+  Imu.msg
+  ImuStamped.msg
+  Led.msg
+  Proximity.msg
+  Velocity.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -53,7 +56,7 @@ generate_messages(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
   INCLUDE_DIRS
-  LIBRARIES triskar
+  LIBRARIES r2p
   CATKIN_DEPENDS message_runtime
   DEPENDS system_lib
 )
@@ -68,19 +71,19 @@ catkin_package(
 # include_directories(include ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
 
 ## Declare a cpp library
-# add_library(triskar
-#   src/${PROJECT_NAME}/triskar.cpp
+# add_library(r2p
+#   src/${PROJECT_NAME}/r2p.cpp
 # )
 
 ## Declare a cpp executable
-# add_executable(triskar_node src/triskar_node.cpp)
+# add_executable(r2p_node src/r2p_node.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-# add_dependencies(triskar_node triskar_generate_messages_cpp)
+# add_dependencies(r2p_node r2p_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(triskar_node
+# target_link_libraries(r2p_node
 #   ${catkin_LIBRARIES}
 # )
 
@@ -99,7 +102,7 @@ catkin_package(
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS triskar triskar_node
+# install(TARGETS r2p r2p_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -124,7 +127,7 @@ catkin_package(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_triskar.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_r2p.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

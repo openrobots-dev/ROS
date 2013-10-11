@@ -1,9 +1,0 @@
-<launch>
-  <!-- triskar quake gui-->
-  
-  <node pkg="image_transport" type="republish" name="rep" args="compressed in:=/prosilica/image_raw raw out:=/localCamera"/>
-    
-  <node pkg="triskar" type="teleop_original.py" name="teleop_keyboard"/>
-  
-  
-</launch>
