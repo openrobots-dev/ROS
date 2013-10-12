@@ -21,12 +21,10 @@ gear_ratio = rospy.get_param('gear_ratio', (
 
 setpoint = {'x': 0.0,'y': 0.0,'w': 0.0}
 gear = 0
-update = 0
 
 def joy_cb(msg):
 	global gear
 	global setpoint
-	global update
    
 	if msg.buttons[3]:
 		gear = 3
@@ -41,8 +39,6 @@ def joy_cb(msg):
 	setpoint['y'] = msg.axes[0] * setpoint_scale['y'] * gear_ratio[gear]['y']
 	setpoint['w'] = msg.axes[2] * setpoint_scale['w'] * gear_ratio[gear]['w']
 	
-	update = 1
-
 def main():
 	global update
 	
@@ -56,7 +52,6 @@ def main():
 	subJoy = rospy.Subscriber("/joy", Joy, joy_cb)
 	
 	while not rospy.is_shutdown():
-		update = 0
 		print setpoint
 		pubVelocity.publish(Velocity(setpoint['x'], setpoint['y'], setpoint['w']))
 		r.sleep()
