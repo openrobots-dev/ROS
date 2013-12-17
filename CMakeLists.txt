@@ -29,6 +29,7 @@ add_message_files(
   ImuStamped.msg
   Led.msg
   Proximity.msg
+  Vector3_32.msg
   Velocity.msg
 )
 
