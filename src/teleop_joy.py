@@ -37,7 +37,7 @@ def joy_cb(msg):
 
 	setpoint['x'] = msg.axes[1] * setpoint_scale['x'] * gear_ratio[gear]['x']
 	setpoint['y'] = msg.axes[0] * setpoint_scale['y'] * gear_ratio[gear]['y']
-	setpoint['w'] = msg.axes[2] * setpoint_scale['w'] * gear_ratio[gear]['w']
+	setpoint['w'] = msg.axes[3] * setpoint_scale['w'] * gear_ratio[gear]['w']
 	
 def main():
 	global update
