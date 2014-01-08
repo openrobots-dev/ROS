@@ -21,11 +21,15 @@ gear_ratio = rospy.get_param('gear_ratio', (
 
 setpoint = {'x': 0.0,'y': 0.0,'w': 0.0}
 gear = 0
+restart = False
 
 def joy_cb(msg):
 	global gear
 	global setpoint
-   
+	global restart
+
+	if msg.buttons[6]:
+		restart = True
 	if msg.buttons[3]:
 		gear = 3
 	if msg.buttons[2]:
@@ -40,7 +44,7 @@ def joy_cb(msg):
 	setpoint['w'] = msg.axes[3] * setpoint_scale['w'] * gear_ratio[gear]['w']
 	
 def main():
-	global update
+	global restart
 	
 	# Initialize ROS stuff
 	rospy.init_node("teleop_joy")
@@ -52,6 +56,13 @@ def main():
 	subJoy = rospy.Subscriber("/joy", Joy, joy_cb)
 	
 	while not rospy.is_shutdown():
+		if restart == True: 
+			pubVelocity.unregister()
+			rospy.sleep(1)
+		        pubVelocity = rospy.Publisher(topic, Velocity)
+		        pubVelocity.publish(Velocity(0.0, 0.0, 0.0))
+			restart = False
+			
 		print setpoint
 		pubVelocity.publish(Velocity(setpoint['x'], setpoint['y'], setpoint['w']))
 		r.sleep()
